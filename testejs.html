@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Calculo de Data</title>
+</head>
+<body>
+    <input type="text" name="t1" id="t1" value="24-09-2021 10:25" readonly onblur="calcularData()"><br>
+    <input type="text" name="t2" id="t2" value="25-09-2021 11:57" readonly onblur="calcularData()"><br>
+    <input type="text" name="dife" id="dife" readonly>
+
+    <script>
+         function calcularData() { 
+            var partida = document.getElementById("t1").value; 
+            var chegada = document.getElementById("t2").value;  
+
+            //Fatiando a partida 
+            var diap = partida.split("-")[0];
+            var mesp = partida.split("-")[1];
+            var anop = partida.split("-")[2].split(" ")[0];
+            var horap = partida.split(" ")[1].split(":")[0];
+            var minutop = partida.split(":")[1]; 
+
+            //Fatiando a chegada
+            var diac = chegada.split("-")[0];
+            var mesc = chegada.split("-")[1];
+            var anoc = chegada.split("-")[2].split(" ")[0];
+            var horac = chegada.split(" ")[1].split(":")[0];
+            var minutoc = chegada.split(":")[1];  
+
+            var dp = new Date(anop, mesp -1, diap, horap, minutop);
+            var dc = new Date(anoc, mesc -1, diac, horac, minutoc);
+
+            var df = Math.abs(dc - dp); 
+            var diffData =dc - dp;
+            
+            var hrDiff = diffData / 3600 / 1000; 
+            var minDiff = diffData / 60 / 1000; 
+
+                  var horaExib = Math.floor(hrDiff); 
+                    if(horaExib <= "9") { 
+                        horaExib = '0'+horaExib; 
+                    }   
+                  var minExib = minDiff - 60 * horaExib; 
+                    if(minExib <= "9") { 
+                        minExib = '0'+minExib; 
+                    }  
+
+            var horamin = horaExib+":"+minExib;        
+
+            console.log(horamin);
+            document.getElementById('dife').value = horamin;        
+       
+
+         }   
+    </script>
+    
+</body>
+</html>
